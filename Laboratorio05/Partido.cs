@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,34 +42,56 @@ namespace Laboratorio05
             {
                 return ganador;
             }
+                
+                double puntajeEquipo1, puntajeEquipo2;
+
+                do
+                {
+                    puntajeEquipo1 = CalcularPuntaje(equipo1);
+                    puntajeEquipo2 = CalcularPuntaje(equipo2);
+
+                } while (puntajeEquipo1 == puntajeEquipo2);
 
 
-            double P1, P2;
+                // ganador = puntajeEquipo1 > Puntaje Equipo2 ?  equipo1 : equipo2
 
-            double x = IRandomGenerator.RandomGenerator.Next();
-
-            do
-            {
-                P1 = x * (((equipo1.GetPartidosGanados() * 0.7) + (equipo1.GetPartidosPerdidos() * 0.1) + (equipo1.GetPartidosEmpatados() * 0.2)) / (equipo1.GetGolesFavor() - equipo1.GetGolesContra() + 0.001));
-
-                P2 = x * (((equipo2.GetPartidosGanados() * 0.7) + (equipo2.GetPartidosPerdidos() * 0.1) + (equipo2.GetPartidosEmpatados() * 0.2)) / (equipo2.GetGolesFavor() - equipo2.GetGolesContra() + 0.001));
-
-
-            } while (P1 == P2);
-
-            if (P1 > P2)
-            {
-
-                ganador = equipo1;
-
-            }
-            else
-            {
-                ganador = equipo2;
-            }
-
+                if (puntajeEquipo1 > puntajeEquipo2)
+                {
+                    ganador = equipo1;
+                }
+                else
+                {
+                    ganador = equipo2;
+                }
+               
+            
             return ganador;
+        }
+
+
+
+
+            private double CalcularPuntaje(Equipo equipo)
+            {
+               
+
+                double x = IRandomGenerator.RandomGenerator.Next();
+
+
+                double resultado =  x * ((equipo.GetPartidosGanados() * 0.7 + equipo.GetPartidosPerdidos() * 0.1 + 
+                equipo.GetPartidosEmpatados()) * 0.2) / (equipo.GetGolesFavor() - equipo.GetGolesContra() + 0.001);
+
+             return resultado;
+            }
+
+
+
+
+
+
+
+            
 
         }
     }
-}
+
