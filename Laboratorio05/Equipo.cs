@@ -12,23 +12,20 @@ namespace Laboratorio05
         private int PartidosGanados;
         private int PartidosEmpatados;
         private int PartidosPerdidos;
-        private int GolesaFavor;
-        private int GolesenContra;
+        private int GolesFavor;
+        private int GolesContra;
 
         public Equipo(string nombre, int partidosGanados, int partidosEmpatados, int partidosPerdidos, int golesFavor, int golesContra)
         {
-        
+            if (partidosEmpatados + partidosGanados + partidosPerdidos != 3 || golesContra < 0 || golesFavor < 0)
+                throw new Exception("Revise el equipo. La sumatoria de partidos debe ser igual a 3 y los goles anotados y a favor deben ser mayores o iguales a cero.");
+
             this.Nombre = nombre;
             this.PartidosGanados = partidosGanados;
             this.PartidosEmpatados = partidosEmpatados;
             this.PartidosPerdidos = partidosPerdidos;
-            this.GolesaFavor = golesFavor;
-            this.GolesenContra = golesContra;
-
-            if (partidosGanados + partidosEmpatados + partidosPerdidos != 3 || golesFavor < 0 || golesContra < 0)
-            {
-                throw new Exception("Revise el equipo. La sumatoria de partidos debe ser igual a 3 y los goles anotados y a favor deben ser mayores o iguales a cero.");
-            }
+            this.GolesFavor = golesFavor;
+            this.GolesContra = golesContra;
         }
 
         public string GetNombre()
@@ -53,12 +50,12 @@ namespace Laboratorio05
 
         public int GetGolesFavor()
         {
-            return GolesaFavor;
+            return GolesFavor;
         }
 
         public int GetGolesContra()
         {
-            return GolesenContra;
+            return GolesContra;
         }
     }
 }
